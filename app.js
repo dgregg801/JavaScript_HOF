@@ -1,10 +1,37 @@
 console.log("Hello World!\n==========\n");
 
-// Exercise 1 Section
+
 console.log("EXERCISE 1:\n==========\n");
+//Higher Order Functions either take a function as a parameter, 
+//Or they return a function
 
 
-console.log("EXERCISE 2:\n==========\n");
+
+// Exercise 1 Section
+function plus(number) {
+    return function (plusNumber) {
+        return plusNumber + number;
+    }
+}
+
+const plus15 = plus(15);
+console.log(plus15(10));
+
+//Example
+function generateGreeting(greeting) {
+    return function (name ){
+        return `${greeting}, ${name}`;
+    }
+}
+
+const greetPerson = generateGreeting("Hello");
+console.log(greetPerson);
+//Invoke the returned function
+console.log(greetPerson("Karen"));
+
+
+
+
 let users = [
     {
       name: "Frodo",
@@ -32,6 +59,7 @@ let users = [
     },
   ];
 
+console.log("EXERCISE 2:\n==========\n");
 //Exercise 2 Section
 
 
@@ -40,6 +68,8 @@ let users = [
     console.log(user.name);
   });
 
+ 
+ 
   console.log("EXERCISE 3:\n==========\n");
   //Exercise 3
   const namesAndScores = users.map(function(user) {
@@ -51,34 +81,59 @@ let users = [
 
   console.log(namesAndScores);
 
+  
+  
   console.log("EXERCISE 4:\n==========\n");
   //Exercise 4
 
-  const activeUsers = users.filter(function(user) {
-    return user.isActive === true;
-  });
-  
-  console.log(activeUsers);
+ // const activeUsers = users.filter(function(user) {
+    //return user.isActive === true;
+//});
 
+//console.log(activeUsers);
+
+//const filteredUsers = users.filter((element, index, array) => {
+  //needs to return true or false
+  //meaning keep or discard
+  //return element.isActive;
+//});
+
+const filteredUsers = users.filter(user => user.isActive);
+
+console.log(filteredUsers);
+
+
+  
   console.log("EXERCISE 5:\n==========\n");
   //Exercise 5
   
-  users.sort(function(a, b) {
+  /*users.sort(function(a, b) {
     return b.score - a.score;
   });
 
   console.log(users);
+*/
 
-  console.log("EXERCISE 6:\n==========\n");
+users.sort((a, b) => {
+    if (a.score > b.score) {
+        return -1;
+    } else if (a.score < b.score) {
+        return 1;
+    } else {
+        return 0;
+    }
+});
+
+console.log(users);
+
+
+
+
+
+console.log("EXERCISE 6:\n==========\n");
   //Exercise 6
 
-  //let userSum = 0;
-  //for (let i = 0; i < users.length; i++) {
-    //userSum += [users.score];
-  //}
-  
-
-  const userSum = users.reduce(function(total, user) {
+  /* const userSum = users.reduce(function(total, user) {
     
     return total + user.score;
 
@@ -88,9 +143,14 @@ let users = [
 
 console.log("Total Score:", userSum);
 console.log("User Average", userAverage);
+*/
 
+const sum = users.reduce((accumulator, currentElement) => {
+    return accumulator + currentElement.score;
+}, 0);
 
-
+console.log(sum);
+console.log(sum/users.length);
 
 
   
